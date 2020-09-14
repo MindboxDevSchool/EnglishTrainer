@@ -6,32 +6,39 @@ namespace EnglishTrainer
 {
     public class TaskManager
     {
+        public TaskManager(List<WordInDictionary> dictionary)
+        {
+            _dictionary = dictionary ?? throw new ArgumentNullException(nameof(dictionary));
+        }
+
         private List<WordInDictionary> _dictionary;
 
         private List<WordInDictionary> GetRandomWords(int amount)
         {
+            // Random rnd = new Random();
+            // int randomIndex;
+            // var result = new List<WordInDictionary>();
+            //
+            // while (result.Count < amount)
+            // {
+            //     randomIndex = rnd.Next(_dictionary.Count);
+            //     if (_dictionary[randomIndex].AmountOfSuccsessfulTranslations < 3)
+            //     {
+            //         result.Add(_dictionary[randomIndex]);
+            //     }
+            //     else
+            //     {
+            //         _dictionary.Remove(_dictionary[randomIndex]);
+            //     }
+            // }
+            // return result;
             Random rnd = new Random();
-            int randomIndex;
-            var result = new List<WordInDictionary>();
-            
-            while (result.Count < amount)
-            {
-                randomIndex = rnd.Next(_dictionary.Count);
-                if (_dictionary[randomIndex].AmountOfSuccsessfulTranslations < 3)
-                {
-                    result.Add(_dictionary[randomIndex]);
-                }
-                else
-                {
-                    _dictionary.Remove(_dictionary[randomIndex]);
-                }
-            }
-            return result;
+            return  _dictionary.OrderBy(elem => rnd.Next()).Take(amount).ToList();
         }
 
-        public Dictionary<WordInDictionary,string> GiveTaskSprint()
+        public Dictionary<WordInDictionary,string> GiveTaskSprint(int amount)
         {
-            var randomWords = GetRandomWords(15);
+            var randomWords = GetRandomWords(amount);
             var result = new Dictionary<WordInDictionary,string>();
             Random rnd = new Random();
             int randomIndex;
