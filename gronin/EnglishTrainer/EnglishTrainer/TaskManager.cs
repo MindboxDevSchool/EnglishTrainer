@@ -32,12 +32,24 @@ namespace EnglishTrainer
             //     }
             // }
             // return result;
+            if (amount > _dictionary.Where(elem => elem.AmountOfSuccsessfulTranslations < 3).Count())
+            {
+                throw new ArgumentException("Not enough words in Dictionary");
+            }
+
             Random rnd = new Random();
-            return  _dictionary.OrderBy(elem => rnd.Next()).Take(amount).ToList();
+            return  _dictionary.Where(elem =>elem.AmountOfSuccsessfulTranslations<3)
+                               .OrderBy(elem => rnd.Next())
+                               .Take(amount).ToList();
         }
 
         public Dictionary<WordInDictionary,string> GiveTaskSprint(int amount)
         {
+            if (amount < 1)
+            {
+                throw new ArgumentException("Amount of questions in task can't be less then 1");
+            }
+
             var randomWords = GetRandomWords(amount);
             var result = new Dictionary<WordInDictionary,string>();
             Random rnd = new Random();
@@ -58,9 +70,13 @@ namespace EnglishTrainer
             return result;
         }
         
-        public List<WordInDictionary> GiveTaskTranslation()
+        public List<WordInDictionary> GiveTaskTranslation(int amount)
         {
-            return GetRandomWords(10);
+            if (amount < 1)
+            {
+                throw new ArgumentException("Amount of questions in task can't be less then 1");
+            }
+            return GetRandomWords(amount);
         }
 
         public TaskResult CheckTaskSprint(Dictionary<WordInDictionary,string> task, List<bool> answers)
@@ -103,8 +119,8 @@ namespace EnglishTrainer
             {
                 if (task[i].Russian == answers[i])
                 {
-                    results.AddIncorrectAnswer(task[i]);
-                    _dictionary.Find(word => word.Equals(task[i]))?.ResetAmountOfSuccsessfulTranslations();
+                    results.AddCorrectAnswer(task[i]);
+                    _dictionary.Find(word => word.Equals(task[i]))?.IncrementAmountOfSuccsessfulTranslations();
                 }
                 else
                 {

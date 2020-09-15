@@ -4,6 +4,12 @@ namespace EnglishTrainer
 {
     public class TaskResult
     {
+        public TaskResult()
+        {
+            CorrectAnswers = new List<WordInDictionary>();
+            IncorrectAnswers = new List<WordInDictionary>();
+        }
+
         public List<WordInDictionary> CorrectAnswers { get; }
         
         public List<WordInDictionary> IncorrectAnswers { get; }
