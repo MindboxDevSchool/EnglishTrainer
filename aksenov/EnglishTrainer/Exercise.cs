@@ -29,7 +29,7 @@ namespace EnglishTrainer
                 if (processedWord.Translation == word.Translation)
                 {
                     rightAnswers++;
-                    processedWord.IncreaseCorrectTranslationsNumber();
+                    processedWord.IncreaseStudyProgress();
                 }
                 else
                 {

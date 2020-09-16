@@ -17,19 +17,19 @@
     {
         public VocabularyWordStatus Status { get; private set; }
 
-        private int _correctTranslationsNumber;
+        private int _studyProgress;
 
         public VocabularyWord(string spelling, string translation): base(spelling, translation)
         {
             Status = VocabularyWordStatus.NotStudied;
-            _correctTranslationsNumber = 0;
+            _studyProgress = 0;
         }
 
-        public void IncreaseCorrectTranslationsNumber()
+        public void IncreaseStudyProgress()
         {
-            _correctTranslationsNumber++;
+            _studyProgress++;
 
-            if (_correctTranslationsNumber == 3)
+            if (_studyProgress == 3)
                 Status = VocabularyWordStatus.Studied;
         }
     }

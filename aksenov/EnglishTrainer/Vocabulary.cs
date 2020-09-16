@@ -17,21 +17,21 @@ namespace EnglishTrainer
         {
             foreach (var word in words)
             {
-                if (Words.First(w => w.Spelling == word.Spelling) == null)
+                if (Words.FirstOrDefault(w => w.Spelling == word.Spelling) == null)
                     return false;
             }
 
             return true;
         }
 
-        private bool IsContainsNotStudiedWords()
+        private bool IsContainsNotStudied()
         {
-            return Words.First(w => w.Status == VocabularyWordStatus.NotStudied) != null;
+            return Words.FirstOrDefault(w => w.Status == VocabularyWordStatus.NotStudied) != null;
         }
 
         public List<VocabularyWord> GetNotStudiedWords()
         {
-            if (!IsContainsNotStudiedWords())
+            if (!IsContainsNotStudied())
                 throw new InvalidOperationException();
             
             return Words.Where(w => w.Status == VocabularyWordStatus.NotStudied).ToList();
