@@ -1,39 +1,43 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EnglishTrainer
 {
-    public abstract class Exercise
+    public abstract class Exercise<T>
     {
-        private Vocabulary _vocabulary;
+        protected Vocabulary _vocabulary;
 
         protected Exercise(Vocabulary vocabulary)
         {
             _vocabulary = vocabulary;
         }
-
-        public abstract ExerciseData GenerateData();
-
-        public List<ProcessedWord> CheckSolution(List<Word> words)
+        
+        public abstract T GetExerciseData();
+        
+        public ExerciseResult CheckSolution(List<Word> words)
         {
-            List<ProcessedWord> processedWords = new List<ProcessedWord>();
+            int rightAnswers = 0;
+            int wrongAnswers = 0;
+            
+            if (!_vocabulary.IsContains(words))
+                throw new InvalidOperationException();
             
             foreach (var word in words)
             {
                 var processedWord = _vocabulary.Words.First(w => w.Spelling == word.Spelling);
                 if (processedWord.Translation == word.Translation)
                 {
-                    processedWords.Add(new ProcessedWord(processedWord.Spelling, processedWord.Translation,
-                        word.Translation, ProcessedWordStatus.Correct));
+                    rightAnswers++;
+                    processedWord.IncreaseCorrectTranslationsNumber();
                 }
                 else
                 {
-                    processedWords.Add(new ProcessedWord(processedWord.Spelling, processedWord.Translation,
-                        word.Translation, ProcessedWordStatus.Incorrect));
+                    wrongAnswers++;
                 }
             }
 
-            return processedWords;
+            return new ExerciseResult(rightAnswers, wrongAnswers);
         }
     }
 }

@@ -17,14 +17,20 @@
     {
         public VocabularyWordStatus Status { get; private set; }
 
+        private int _correctTranslationsNumber;
+
         public VocabularyWord(string spelling, string translation): base(spelling, translation)
         {
-            Status = VocabularyWordStatus.Studied;
+            Status = VocabularyWordStatus.NotStudied;
+            _correctTranslationsNumber = 0;
         }
-        
-        public void TryChangeStatus(VocabularyWordStatus newStatus)
+
+        public void IncreaseCorrectTranslationsNumber()
         {
-            Status = newStatus;
+            _correctTranslationsNumber++;
+
+            if (_correctTranslationsNumber == 3)
+                Status = VocabularyWordStatus.Studied;
         }
     }
     
@@ -32,24 +38,5 @@
     {
         Studied,
         NotStudied
-    }
-
-    public class ProcessedWord : Word
-    {
-        public string ChoosedTranslation { get; private set; }
-        
-        public ProcessedWordStatus Status { get; private set; }
-
-        public ProcessedWord(string spelling, string correctTranslation, string choosedTranslation, ProcessedWordStatus status): base(spelling, correctTranslation)
-        {
-            ChoosedTranslation = choosedTranslation;
-            Status = status;
-        }
-    }
-    
-    public enum ProcessedWordStatus
-    {
-        Correct,
-        Incorrect
     }
 }
