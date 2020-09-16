@@ -7,11 +7,6 @@ namespace EnglishTrainer.Tests
 {
     public class CsvHandlerTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void LoadFromCsv_correctTransformationToList()
         {
