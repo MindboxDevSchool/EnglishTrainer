@@ -2,11 +2,15 @@
 {
     public static class ManualTranslation
     {
-        public static void ManualTranslationProcess(WordsPairs wordsPairs)
+        public static int CountUserResults(WordsPair[] generatedWordsPairs, string[] userAnswersForSprintMode)
         {
-            const int numberOfWords = 15;
-            int userScore;
-            
+            int userScore = 0;
+            for (int i = 0; i < generatedWordsPairs.Length; i++)
+            {
+                if (generatedWordsPairs[i]._englishWord == userAnswersForSprintMode[i])
+                    userScore++;
+            }
+            return userScore;
         }
     }
 }

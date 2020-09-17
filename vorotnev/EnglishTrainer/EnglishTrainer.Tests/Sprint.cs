@@ -25,7 +25,7 @@ namespace Sprint.Tests
             // act
             var result = 0;
             // assert
-            EnglishTrainer.Sprint.SprintProcess(wordsPairs);
+            Trainer.StartTrainer(0);
             Assert.Pass();
         }
     }

@@ -9,11 +9,19 @@ namespace EnglishTrainer
             Console.WriteLine(text);
         }
 
-        public static void OutputGeneratedWordsPairs(WordsPair[] generatedWordsPairs)
+        public static void OutputSprintGeneratedWordsPairs(WordsPair[] generatedWordsPairs)
         {
             foreach (var wordsPair in generatedWordsPairs)
             {
                 Console.WriteLine($"{wordsPair._englishWord}, {wordsPair._russianWord}");
+            }
+        }
+
+        public static void OutputManualTranslationGeneratedWords(WordsPair[] generatedWordsPairs)
+        {
+            foreach (var wordsPair in generatedWordsPairs)
+            {
+                Console.WriteLine($"{wordsPair._englishWord}");
             }
         }
     }

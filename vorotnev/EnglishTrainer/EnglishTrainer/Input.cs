@@ -46,5 +46,16 @@ namespace EnglishTrainer
 
             return userAnswersForSprintMode;
         }
+
+        public static string[] GetUserAnswersForManualTranslationMode(int numberOfWords)
+        {
+            var input = new string[numberOfWords];
+            for (int i = 0; i > numberOfWords; i++)
+            {
+                input[i] = Console.ReadLine();
+            }
+
+            return input;
+        }
     }
 }
