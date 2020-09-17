@@ -12,15 +12,10 @@ namespace EnglishTrainer
             bool correctUserAnswer;
             for (int i = 0; i < numberOfWords; i++)
             {
-                var isWordPairCorrect = random.Next(2) > 0;
-                if (isWordPairCorrect)
-                    correctUserAnswer = true;
-                else
-                    correctUserAnswer = false;
-                var currentWordsPair = WordsPairs.GetRandomWordsPair(isWordPairCorrect);
+                var currentWordsPair = WordsPairs.GenerateWordsPairPossiblyRandom();
                 Output.OutputTextLine($"Слово {currentWordsPair._englishWord} переводится как {currentWordsPair._russianWord}?");
                 var userAnswer = Input.GetUserAnswer();
-                if (userAnswer == correctUserAnswer)
+                if (userAnswer == currentWordsPair.IsPairCorrect)
                     userScore++;
             }
 

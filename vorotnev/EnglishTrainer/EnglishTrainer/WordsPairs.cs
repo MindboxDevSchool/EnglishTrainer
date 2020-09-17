@@ -40,16 +40,25 @@ namespace EnglishTrainer
                         generatedIndexesAreTheSame = false;
                 }
 
-                return CreateWordsPairWithIndexes(englishWordIndex, russianWordIndex);
+                return CreateWordsPairWithIndexes(englishWordIndex, russianWordIndex, false);
             }
         }
         
-        public static WordsPair CreateWordsPairWithIndexes(int englishWordIndex, int russianWordIndex)
+        public static WordsPair CreateWordsPairWithIndexes(int englishWordIndex, int russianWordIndex, bool isPairCorrect)
         {
             string englishWord = WordsPairs.GetWordsPair(englishWordIndex)._englishWord;
             string russianWord = WordsPairs.GetWordsPair(russianWordIndex)._russianWord;
-            WordsPair wordsPair = new WordsPair(englishWord, russianWord);
+            WordsPair wordsPair = new WordsPair(englishWord, russianWord, isPairCorrect);
             return wordsPair;
+        }
+
+        public static WordsPair GenerateWordsPairPossiblyRandom()
+        {
+            var random = new Random();
+            bool correctUserAnswer;
+            var isWordPairCorrect = random.Next(2) > 0;
+            var currentWordsPair = WordsPairs.GetRandomWordsPair(isWordPairCorrect);
+            return currentWordsPair;
         }
     }
 }

@@ -7,11 +7,11 @@ namespace EnglishTrainer
     {
         public Input()
         {
-            WordsPair wordsPair1 = new WordsPair("one", "один");
-            WordsPair wordsPair2 = new WordsPair("two", "два");
-            WordsPair wordsPair3 = new WordsPair("three", "три");
-            WordsPair wordsPair4 = new WordsPair("four", "четыре");
-            WordsPair wordsPair5 = new WordsPair("five", "пять");
+            WordsPair wordsPair1 = new WordsPair("one", "один", true);
+            WordsPair wordsPair2 = new WordsPair("two", "два", true);
+            WordsPair wordsPair3 = new WordsPair("three", "три", true);
+            WordsPair wordsPair4 = new WordsPair("four", "четыре", true);
+            WordsPair wordsPair5 = new WordsPair("five", "пять", true);
             
             List<WordsPair> wordsPairsList = new List<WordsPair>();
             wordsPairsList.Add(wordsPair1);
