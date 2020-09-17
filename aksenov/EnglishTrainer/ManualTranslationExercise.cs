@@ -18,8 +18,8 @@ namespace EnglishTrainer
 
             for (int i = 0; i < 10; i++)
             {
-                int randomWordNumber = random.Next(0, notStudiedWords.Count);
-                Word randomWord = notStudiedWords[randomWordNumber];
+                int randomWordIndex = random.Next(0, notStudiedWords.Count);
+                Word randomWord = notStudiedWords[randomWordIndex];
                 generatedWords[i] = randomWord.Spelling;
             }
 

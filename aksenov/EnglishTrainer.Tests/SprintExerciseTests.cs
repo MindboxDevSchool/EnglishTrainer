@@ -11,7 +11,8 @@ namespace EnglishTrainer.Tests
             //arrange
             Vocabulary vocabulary = new Vocabulary(new List<VocabularyWord>()
             {
-                new VocabularyWord("dog", "собака")
+                new VocabularyWord("dog", "собака"),
+                new VocabularyWord("cat", "кошка")
             });
 
             SprintExercise exercise = new SprintExercise(vocabulary);

@@ -32,7 +32,7 @@ namespace EnglishTrainer
         public List<VocabularyWord> GetNotStudiedWords()
         {
             if (!IsContainsNotStudied())
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Vocabulary doesn't contain not studied words.");
             
             return Words.Where(w => w.Status == VocabularyWordStatus.NotStudied).ToList();
         }

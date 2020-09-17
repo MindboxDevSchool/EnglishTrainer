@@ -6,7 +6,7 @@ namespace EnglishTrainer
 {
     public abstract class Exercise<T>
     {
-        protected Vocabulary _vocabulary;
+        protected readonly Vocabulary _vocabulary;
 
         protected Exercise(Vocabulary vocabulary)
         {
@@ -21,7 +21,7 @@ namespace EnglishTrainer
             int wrongAnswers = 0;
             
             if (!_vocabulary.IsContains(words))
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Vocabulary doesn't contain these words. Unable to complete solution validation.");
             
             foreach (var word in words)
             {

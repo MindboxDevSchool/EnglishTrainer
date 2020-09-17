@@ -18,8 +18,8 @@ namespace EnglishTrainer
 
             for (int i = 0; i < 15; i++)
             {
-                int randomWordNumber = random.Next(0, notStudiedWords.Count);
-                Word randomWord = notStudiedWords[randomWordNumber];
+                int randomWordIndex = random.Next(0, notStudiedWords.Count);
+                Word randomWord = notStudiedWords[randomWordIndex];
 
                 if (random.NextDouble() < 0.5)
                 {
@@ -27,8 +27,8 @@ namespace EnglishTrainer
                 }
                 else
                 {
-                    randomWordNumber = random.Next(0, _vocabulary.Words.Count);
-                    generatedWords[i] = new Word(randomWord.Spelling, _vocabulary.Words[randomWordNumber].Translation);
+                    randomWordIndex = random.Next(0, _vocabulary.Words.Count);
+                    generatedWords[i] = new Word(randomWord.Spelling, _vocabulary.Words[randomWordIndex].Translation);
                 }
             }
 
