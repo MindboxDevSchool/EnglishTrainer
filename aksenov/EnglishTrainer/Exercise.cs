@@ -15,7 +15,7 @@ namespace EnglishTrainer
         
         public abstract T GetExerciseData();
         
-        public ExerciseResult CheckSolution(List<Word> words)
+        public ExerciseResult CheckExerciseSolution(List<Word> words)
         {
             int rightAnswers = 0;
             int wrongAnswers = 0;

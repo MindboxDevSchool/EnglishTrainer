@@ -6,7 +6,7 @@ namespace EnglishTrainer.Tests
     public class ExerciseTests
     {
         [Test]
-        public void CheckSolution_4WordsInInput_TwoAreCorrect()
+        public void CheckExerciseSolution_4WordsInInput_TwoAreCorrect()
         {
             //arrange
             Vocabulary vocabulary = new Vocabulary(new List<VocabularyWord>()
@@ -32,7 +32,7 @@ namespace EnglishTrainer.Tests
             SprintExercise exercise = new SprintExercise(vocabulary);
 
             //act
-            ExerciseResult exerciseResult = exercise.CheckSolution(words);
+            ExerciseResult exerciseResult = exercise.CheckExerciseSolution(words);
 
             //assert
             Assert.AreEqual(2, exerciseResult.RightAnswersNumber);
