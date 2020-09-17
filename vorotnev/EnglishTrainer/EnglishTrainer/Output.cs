@@ -8,5 +8,13 @@ namespace EnglishTrainer
         {
             Console.WriteLine(text);
         }
+
+        public static void OutputGeneratedWordsPairs(WordsPair[] generatedWordsPairs)
+        {
+            foreach (var wordsPair in generatedWordsPairs)
+            {
+                Console.WriteLine($"{wordsPair._englishWord}, {wordsPair._russianWord}");
+            }
+        }
     }
 }

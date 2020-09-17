@@ -26,7 +26,7 @@ namespace EnglishTrainer
         {
             var random = new Random();
             if (isPairCorrect)
-                return _wordsPairs[random.Next(GetNumberOfWordsPairs() + 1)];
+                return _wordsPairs[random.Next(GetNumberOfWordsPairs())];
             else
             {
                 var generatedIndexesAreTheSame = true;
@@ -34,8 +34,8 @@ namespace EnglishTrainer
                 var russianWordIndex = new int();
                 while (generatedIndexesAreTheSame)
                 {
-                    englishWordIndex = random.Next(GetNumberOfWordsPairs() + 1);
-                    russianWordIndex = random.Next(GetNumberOfWordsPairs() + 1);
+                    englishWordIndex = random.Next(GetNumberOfWordsPairs());
+                    russianWordIndex = random.Next(GetNumberOfWordsPairs());
                     if (englishWordIndex != russianWordIndex)
                         generatedIndexesAreTheSame = false;
                 }

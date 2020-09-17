@@ -5,7 +5,7 @@ namespace EnglishTrainer
 {
     public class Input
     {
-        public Input()
+        public static WordsPairs GetWordsPairs()
         {
             WordsPair wordsPair1 = new WordsPair("one", "один", true);
             WordsPair wordsPair2 = new WordsPair("two", "два", true);
@@ -21,6 +21,7 @@ namespace EnglishTrainer
             wordsPairsList.Add(wordsPair5);
             
             WordsPairs wordsPairs = new WordsPairs(wordsPairsList);
+            return wordsPairs;
         }
 
         public static bool GetUserAnswer()
@@ -29,6 +30,21 @@ namespace EnglishTrainer
             if (input == "1")
                 return true;
             return false;
+        }
+
+        public static bool[] GetUserAnswersForSprintMode(int numberOfWords)
+        {
+            var userAnswersForSprintMode = new bool[numberOfWords];
+            for (int i = 0; i > numberOfWords; i++)
+            {
+                var input = Console.ReadLine();
+                if (input == "1" || input == "Да")
+                    userAnswersForSprintMode[i] = true;
+                else
+                    userAnswersForSprintMode[i] = false;
+            }
+
+            return userAnswersForSprintMode;
         }
     }
 }
