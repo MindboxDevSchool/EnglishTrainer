@@ -1,0 +1,10 @@
+﻿/markelov/.idea/*
+/markelov/EnglishTrainer/bin/*
+/markelov/EnglishTrainer/obj/*
+/markelov/EnglishTrainer.DictionaryParser/bin/*
+/markelov/EnglishTrainer.DictionaryParser/obj/*
+/markelov/EnglishTrainer.Display/bin/*
+/markelov/EnglishTrainer.Display/obj/*
+/markelov/EnglishTrainer.Tests/bin/*
+/markelov/EnglishTrainer.Tests/obj/*
+/markelov/EnglishTrainer.Tests/netcoreapp2.1/*
