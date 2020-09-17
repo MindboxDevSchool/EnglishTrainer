@@ -21,7 +21,7 @@ namespace EnglishTrainer.Tests
             }
 
             //assert
-            Assert.AreEqual(VocabularyWordStatus.Studied, vocabulary.Words[0].Status);
+            Assert.IsTrue(vocabulary.Words[0].IsStudied);
         }
     }
 }

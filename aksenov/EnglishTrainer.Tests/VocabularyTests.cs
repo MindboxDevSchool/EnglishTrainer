@@ -6,81 +6,68 @@ namespace EnglishTrainer.Tests
     public class VocabularyTests
     {
         [Test]
-        public void IsContains_3WordsFromVocabulary()
+        public void DoesContain_2WordsInInput_BothFromVocabulary()
         {
             //arrange
             Vocabulary vocabulary = new Vocabulary(new List<VocabularyWord>()
             {
                 new VocabularyWord("word", "слово"),
                 new VocabularyWord("dog", "собака"),
-                new VocabularyWord("cat", "кошка"),
-                new VocabularyWord("car", "машина"),
-                new VocabularyWord("apple", "яблоко")
+                new VocabularyWord("cat", "кошка")
             });
             
             List<Word> words = new List<Word>()
             {
                 new Word("word", "слово"),
-                new VocabularyWord("cat", "кошка"),
-                new VocabularyWord("apple", "яблоко")
+                new Word("cat", "кошка")
             };
             
             //act
-            bool isContains = vocabulary.IsContains(words);
+            bool doesContain = vocabulary.DoesContain(words);
 
             //assert
-            Assert.AreEqual(true, isContains);
+            Assert.IsTrue(doesContain);
         }
         
         [Test]
-        public void IsContains_2WordsNotFromVocabulary()
+        public void DoesContain_2WordsInInput_1NotFromVocabulary()
         {
             //arrange
             Vocabulary vocabulary = new Vocabulary(new List<VocabularyWord>()
             {
                 new VocabularyWord("word", "слово"),
                 new VocabularyWord("dog", "собака"),
-                new VocabularyWord("cat", "кошка"),
-                new VocabularyWord("car", "машина"),
-                new VocabularyWord("apple", "яблоко")
+                new VocabularyWord("cat", "кошка")
             });
             
             List<Word> words = new List<Word>()
             {
-                new VocabularyWord("word", "слово"),
-                new VocabularyWord("green", "зеленый"),
-                new VocabularyWord("red", "красный")
+                new Word("word", "слово"),
+                new Word("green", "зеленый")
             };
             
             //act
-            bool isContains = vocabulary.IsContains(words);
+            bool doesContain = vocabulary.DoesContain(words);
 
             //assert
-            Assert.AreEqual(false, isContains);
+            Assert.IsFalse(doesContain);
         }
         
         [Test]
-        public void GetNotStudiedWords_3NotStudiedWordsInVocabulary()
+        public void GetNotStudiedWords_2NotStudiedWordsInVocabulary_CorrectOutputListSize()
         {
             //arrange
             Vocabulary vocabulary = new Vocabulary(new List<VocabularyWord>()
             {
                 new VocabularyWord("yellow", "желтый"),
-                new VocabularyWord("green", "зеленый"),
-                new VocabularyWord("red", "красный"),
-                new VocabularyWord("pink", "розовый")
+                new VocabularyWord("green", "зеленый")
             });
 
             //act
-            for (int i = 0; i < 3; i++)
-            {
-                vocabulary.Words[0].IncreaseStudyProgress();
-            }
-
             List<VocabularyWord> notStudiedWords = vocabulary.GetNotStudiedWords();
 
             //assert
-            Assert.AreEqual(3, notStudiedWords.Count);
+            Assert.AreEqual(2, notStudiedWords.Count);
         }
     }
 }

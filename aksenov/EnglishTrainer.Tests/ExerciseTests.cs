@@ -6,27 +6,20 @@ namespace EnglishTrainer.Tests
     public class ExerciseTests
     {
         [Test]
-        public void CheckExerciseSolution_4WordsInInput_TwoAreCorrect()
+        public void CheckExerciseSolution_2WordsInInput_OneIsCorrect()
         {
             //arrange
             Vocabulary vocabulary = new Vocabulary(new List<VocabularyWord>()
             {
                 new VocabularyWord("dog", "собака"),
                 new VocabularyWord("cat", "кошка"),
-                new VocabularyWord("car", "машина"),
-                new VocabularyWord("apple", "яблоко"),
-                new VocabularyWord("yellow", "желтый"),
-                new VocabularyWord("green", "зеленый"),
-                new VocabularyWord("red", "красный"),
-                new VocabularyWord("pink", "розовый")
+                new VocabularyWord("apple", "яблоко")
             });
             
             List<Word> words = new List<Word>()
             {
                 new Word("dog", "кошка"),
-                new Word("apple", "яблоко"),
-                new VocabularyWord("yellow", "красный"),
-                new VocabularyWord("green", "зеленый")
+                new Word("apple", "яблоко")
             };
             
             SprintExercise exercise = new SprintExercise(vocabulary);
@@ -35,8 +28,8 @@ namespace EnglishTrainer.Tests
             ExerciseResult exerciseResult = exercise.CheckExerciseSolution(words);
 
             //assert
-            Assert.AreEqual(2, exerciseResult.RightAnswersNumber);
-            Assert.AreEqual(2, exerciseResult.WrongAnswersNumber);
+            Assert.AreEqual(1, exerciseResult.RightAnswersNumber);
+            Assert.AreEqual(1, exerciseResult.WrongAnswersNumber);
         }
     }
 }

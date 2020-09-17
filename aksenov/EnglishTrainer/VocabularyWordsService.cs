@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EnglishTrainer
 {
-    public class DataService
+    public class VocabularyWordsService
     {
         public List<VocabularyWord> LoadWordsFromFile(string path)
         {

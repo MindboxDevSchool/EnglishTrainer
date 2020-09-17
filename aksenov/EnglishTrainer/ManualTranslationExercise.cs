@@ -19,8 +19,8 @@ namespace EnglishTrainer
             for (int i = 0; i < 10; i++)
             {
                 int randomWordIndex = random.Next(0, notStudiedWords.Count);
-                Word randomWord = notStudiedWords[randomWordIndex];
-                generatedWords[i] = randomWord.Spelling;
+                VocabularyWord randomWord = notStudiedWords[randomWordIndex];
+                generatedWords[i] = randomWord.Base.Spelling;
             }
 
             return generatedWords;

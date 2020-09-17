@@ -12,14 +12,14 @@ namespace EnglishTrainer.Tests
             //arrange
             string pathToCSVTestFile = new DirectoryInfo(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName + "\\test files\\DataServiceTestData.csv";
             
-            DataService dataService = new DataService();
+            VocabularyWordsService wordService = new VocabularyWordsService();
 
             //act
-            List<VocabularyWord> words = dataService.LoadWordsFromFile(pathToCSVTestFile);
+            List<VocabularyWord> words = wordService.LoadWordsFromFile(pathToCSVTestFile);
 
             //assert
-            Assert.AreEqual("red", words[1].Spelling);
-            Assert.AreEqual("красный", words[1].Translation);
+            Assert.AreEqual("red", words[1].Base.Spelling);
+            Assert.AreEqual("красный", words[1].Base.Translation);
         }
     }
 }

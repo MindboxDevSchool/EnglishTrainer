@@ -20,13 +20,13 @@ namespace EnglishTrainer
             int rightAnswers = 0;
             int wrongAnswers = 0;
             
-            if (!_vocabulary.IsContains(words))
+            if (!_vocabulary.DoesContain(words))
                 throw new InvalidOperationException("Vocabulary doesn't contain these words. Unable to complete solution validation.");
             
             foreach (var word in words)
             {
-                var processedWord = _vocabulary.Words.First(w => w.Spelling == word.Spelling);
-                if (processedWord.Translation == word.Translation)
+                var processedWord = _vocabulary.Words.First(w => w.Base.Spelling == word.Spelling);
+                if (processedWord.Base.Translation == word.Translation)
                 {
                     rightAnswers++;
                     processedWord.IncreaseStudyProgress();
