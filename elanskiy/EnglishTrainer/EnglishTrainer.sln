@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishTrainer", "EnglishTrainer\EnglishTrainer.csproj", "{978B8420-403A-4980-B6D4-E14659A67E02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEnglishTrainer", "TestEnglishTrainer\TestEnglishTrainer.csproj", "{0E2B9337-B9BC-49E3-99C5-06A03E7B74DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{978B8420-403A-4980-B6D4-E14659A67E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{978B8420-403A-4980-B6D4-E14659A67E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{978B8420-403A-4980-B6D4-E14659A67E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{978B8420-403A-4980-B6D4-E14659A67E02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E2B9337-B9BC-49E3-99C5-06A03E7B74DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E2B9337-B9BC-49E3-99C5-06A03E7B74DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E2B9337-B9BC-49E3-99C5-06A03E7B74DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E2B9337-B9BC-49E3-99C5-06A03E7B74DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
