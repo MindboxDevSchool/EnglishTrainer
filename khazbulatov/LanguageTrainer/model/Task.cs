@@ -2,44 +2,50 @@
 
 namespace LanguageTrainer.model
 {
-    public abstract class Task<TAnswer>
+    public abstract class Task
     {
-        protected string _correctTranslation;
+        public string Word { get; }
+
+        public abstract bool CheckAnswer(object answer);
+        
+        protected string CorrectTranslation { get; }
         
         protected Task(string word, string rightTranslation)
         {
             Word = word;
-            _correctTranslation = rightTranslation;
+            CorrectTranslation = rightTranslation;
+        }
+    }
+    
+    public abstract class Task<TAnswer> : Task
+    {
+        public override bool CheckAnswer(object answer)
+        {
+            if (!(answer is TAnswer concreteAnswer)) throw new ArgumentException();
+            return CheckConcreteAnswer(concreteAnswer);
         }
         
-        public static Type AnswerType = typeof(TAnswer); 
-        public string Word { get; }
+        protected abstract bool CheckConcreteAnswer(TAnswer answer);
         
-        public abstract bool CheckAnswer(TAnswer answer);
+        protected Task(string word, string rightTranslation) : base(word, rightTranslation) { }
     }
 
     public class SprintTask : Task<bool>
     {
-        private string _translation;
-
         public SprintTask(string word, string translation, string rightTranslation) : base(word, rightTranslation)
         {
-            _translation = translation;
+            Translation = translation;
         }
 
-        public override bool CheckAnswer(bool answer)
-        {
-            return answer == (_translation == _correctTranslation);
-        }
+        protected override bool CheckConcreteAnswer(bool answer) => answer == (Translation == CorrectTranslation);
+        
+        private string Translation { get; }
     }
 
     public class TranslationTask : Task<string>
     {
         public TranslationTask(string word, string rightTranslation) : base(word, rightTranslation) { }
 
-        public override bool CheckAnswer(string answer)
-        {
-            return answer.ToLower() == _correctTranslation.ToLower();
-        }
+        protected override bool CheckConcreteAnswer(string answer) => answer.ToLower() == CorrectTranslation.ToLower();
     }
 }

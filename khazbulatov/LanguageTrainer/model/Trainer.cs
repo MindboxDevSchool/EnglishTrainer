@@ -1,51 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LanguageTrainer.model
 {
     public class Trainer
     {
-        private readonly WordDictionary _dictionary;
-        private Dictionary<string, PracticedWord> _practiced;
+        private WordDictionary Words { get; }
+        private Dictionary<string, int> PracticedWords { get; }
+        private int TimesPracticedToLearn { get; }
 
-        public Trainer(WordDictionary dictionary)
+        public Trainer(WordDictionary words, int timesPracticedToLearn)
         {
-            _dictionary = dictionary;
+            Words = words;
+            PracticedWords = new Dictionary<string, int>();
+            TimesPracticedToLearn = timesPracticedToLearn;
         }
 
-        public void TakeSprintExercise(Func<SprintTask, bool> taskPresenter)
+        public void Practice<TExercise>() where TExercise : Exercise, new()
         {
-            SprintExercise exercise = new SprintExercise(_dictionary);
-            IEnumerable<string> correct = exercise.Practice(taskPresenter);
-            foreach (string word in correct)
+            TExercise exercise = Exercise.Create<TExercise>(Words);
+            IEnumerable<string> correctWords = exercise.Practice();
+            foreach (string word in correctWords)
             {
-                if (!_practiced.ContainsKey(word))
-                {
-                    _practiced[word] = new PracticedWord(word);
-                }
-                _practiced[word].Sprints++;
-                if (_practiced[word].Learned)
-                {
-                    _dictionary.Remove(word);
-                }
-            }
-        }
-        
-        public void TakeTranslationExercise(Func<TranslationTask, string> taskPresenter)
-        {
-            TranslationExercise exercise = new TranslationExercise(_dictionary);
-            IEnumerable<string> correct = exercise.Practice(taskPresenter);
-            foreach (string word in correct)
-            {
-                if (!_practiced.ContainsKey(word))
-                {
-                    _practiced[word] = new PracticedWord(word);
-                }
-                _practiced[word].Translations++;
-                if (_practiced[word].Learned)
-                {
-                    _dictionary.Remove(word);
-                }
+                int timesPracticed = PracticedWords.GetValueOrDefault(word) + 1;
+                if (timesPracticed >= TimesPracticedToLearn) Words.Remove(word);
+                PracticedWords[word] = timesPracticed;
             }
         }
     }
