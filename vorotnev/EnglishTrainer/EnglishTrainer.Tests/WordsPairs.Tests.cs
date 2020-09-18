@@ -27,5 +27,86 @@ namespace Sprint.Tests
             // assert
             Assert.AreEqual(result, WordsPairs.GetNumberOfWordsPairs());
         }
+
+        [Test]
+        public void GetWordsPair_FirstPair()
+        {
+            // arrange
+            var indexOfPair = 0;
+            var wordsPairs = new WordsPairs(Input.GetWordsPairs());
+            WordsPair expected = new WordsPair("one", "один", true);
+            // act
+            var result = WordsPairs.GetWordsPair(indexOfPair);
+            // assert
+            Assert.AreEqual(expected._englishWord, result._englishWord);
+            Assert.AreEqual(expected._russianWord, result._russianWord);
+        }
+        
+        [Test]
+        public void GetRandomWordsPair_CorrectPair()
+        {
+            // arrange
+            var wordsPairs = new WordsPairs(Input.GetWordsPairs());
+            // act
+            var result = WordsPairs.GetRandomWordsPair(true);
+            // assert
+            Assert.AreEqual(true, result.IsPairCorrect);
+        }
+        
+        [Test]
+        public void GetRandomWordsPair_IncorrectPair()
+        {
+            // arrange
+            var wordsPairs = new WordsPairs(Input.GetWordsPairs());
+            // act
+            var result = WordsPairs.GetRandomWordsPair(false);
+            // assert
+            Assert.AreEqual(false, result.IsPairCorrect);
+        }
+
+        [Test]
+        public void CreateWordsPairWithIndexes_CorrectPair()
+        {
+            // arrange
+            WordsPairs wordsPairs = new WordsPairs(Input.GetWordsPairs());
+            var englishWordIndex = 2;
+            var russianWordIndex = 2;
+            var isPairCorrect = true;
+            WordsPair expected = new WordsPair("three", "три", true);
+            // act
+            var result = WordsPairs.CreateWordsPairWithIndexes(englishWordIndex, russianWordIndex, isPairCorrect);
+            // assert
+            Assert.AreEqual(expected._englishWord, result._englishWord);
+            Assert.AreEqual(expected._russianWord, result._russianWord);
+            Assert.AreEqual(expected.IsPairCorrect, result.IsPairCorrect);
+        }
+        
+        [Test]
+        public void CreateWordsPairWithIndexes_IncorrectPair()
+        {
+            // arrange
+            WordsPairs wordsPairs = new WordsPairs(Input.GetWordsPairs());
+            var englishWordIndex = 2;
+            var russianWordIndex = 3;
+            var isPairCorrect = false;
+            WordsPair expected = new WordsPair("three", "четыре", false);
+            // act
+            var result = WordsPairs.CreateWordsPairWithIndexes(englishWordIndex, russianWordIndex, isPairCorrect);
+            // assert
+            Assert.AreEqual(expected._englishWord, result._englishWord);
+            Assert.AreEqual(expected._russianWord, result._russianWord);
+            Assert.AreEqual(expected.IsPairCorrect, result.IsPairCorrect);
+        }
+
+        [Test]
+        public void GenerateWordsPairPossiblyRandom()
+        {
+            // arrange
+            WordsPairs wordsPairs = new WordsPairs(Input.GetWordsPairs());
+            // act
+            var result = WordsPairs.GenerateWordsPairPossiblyRandom();
+            // assert
+            Assert.IsNotNull(result);
+        }
     }
 }

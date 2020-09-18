@@ -9,6 +9,19 @@ namespace EnglishTrainer
             Console.WriteLine(text);
         }
 
+        public static void OutputGeneratedWordsPairs(int mode, WordsPair[] generatedWordsPairs)
+        {
+            switch (mode)
+            {
+                case 0:
+                    OutputSprintGeneratedWordsPairs(generatedWordsPairs);
+                    break;
+                case 1:
+                    OutputManualTranslationGeneratedWords(generatedWordsPairs);
+                    break;
+            }
+        }
+        
         public static void OutputSprintGeneratedWordsPairs(WordsPair[] generatedWordsPairs)
         {
             foreach (var wordsPair in generatedWordsPairs)
@@ -23,6 +36,11 @@ namespace EnglishTrainer
             {
                 Console.WriteLine($"{wordsPair._englishWord}");
             }
+        }
+
+        public static void OutputFinalResult(int userScore, int numberOfWords)
+        {
+            Console.WriteLine($"Вы правильно перевели {userScore} слов, неправильно - {numberOfWords}");
         }
     }
 }

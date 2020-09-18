@@ -1,11 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace EnglishTrainer
 {
     public class Input
     {
-        public static WordsPairs GetWordsPairs()
+        public static void GetInputFromFile(string filename)
+        {
+            string path = $@"{filename}";
+            
+            using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] words = line.Split(',');
+                    WordsPair wordsPair = new WordsPair(words[0], words[1], true);
+                }
+            }
+        }
+        
+        public static List<WordsPair> GetWordsPairs()
         {
             WordsPair wordsPair1 = new WordsPair("one", "один", true);
             WordsPair wordsPair2 = new WordsPair("two", "два", true);
@@ -20,18 +36,9 @@ namespace EnglishTrainer
             wordsPairsList.Add(wordsPair4);
             wordsPairsList.Add(wordsPair5);
             
-            WordsPairs wordsPairs = new WordsPairs(wordsPairsList);
-            return wordsPairs;
+            return wordsPairsList;
         }
-
-        public static bool GetUserAnswer()
-        {
-            var input = Console.ReadLine();
-            if (input == "1")
-                return true;
-            return false;
-        }
-
+        
         public static bool[] GetUserAnswersForSprintMode(int numberOfWords)
         {
             var userAnswersForSprintMode = new bool[numberOfWords];
