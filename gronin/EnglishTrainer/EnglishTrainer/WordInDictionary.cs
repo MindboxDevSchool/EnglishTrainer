@@ -7,7 +7,8 @@ namespace EnglishTrainer
     [IgnoreFirst()]
     public class WordInDictionary
     {
-        public WordInDictionary()
+        //Empty constructor is required for FileHelpers to work correctly
+        private WordInDictionary()
         {
         }
 

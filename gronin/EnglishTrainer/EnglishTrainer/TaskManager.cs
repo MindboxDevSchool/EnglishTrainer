@@ -15,24 +15,7 @@ namespace EnglishTrainer
 
         private List<WordInDictionary> GetRandomWords(int amount)
         {
-            // Random rnd = new Random();
-            // int randomIndex;
-            // var result = new List<WordInDictionary>();
-            //
-            // while (result.Count < amount)
-            // {
-            //     randomIndex = rnd.Next(_dictionary.Count);
-            //     if (_dictionary[randomIndex].AmountOfSuccsessfulTranslations < 3)
-            //     {
-            //         result.Add(_dictionary[randomIndex]);
-            //     }
-            //     else
-            //     {
-            //         _dictionary.Remove(_dictionary[randomIndex]);
-            //     }
-            // }
-            // return result;
-            if (amount > _dictionary.Where(elem => elem.AmountOfSuccsessfulTranslations < 3).Count())
+            if (amount > _dictionary.Count(elem => elem.AmountOfSuccsessfulTranslations < 3))
             {
                 throw new ArgumentException("Not enough words in Dictionary");
             }
@@ -53,8 +36,7 @@ namespace EnglishTrainer
             var randomWords = GetRandomWords(amount);
             var result = new Dictionary<WordInDictionary,string>();
             Random rnd = new Random();
-            int randomIndex;
-            
+
             for (int i = 0; i < randomWords.Count; i++)
             {
                 if (rnd.Next(10) < 5)
@@ -63,7 +45,7 @@ namespace EnglishTrainer
                 }
                 else
                 {
-                    randomIndex = rnd.Next(_dictionary.Count);
+                    var randomIndex = rnd.Next(_dictionary.Count);
                     result[randomWords[i]] = _dictionary[randomIndex].Russian;
                 }
             }
@@ -100,7 +82,6 @@ namespace EnglishTrainer
                     results.AddIncorrectAnswer(item.Key);
                     _dictionary.Find(word => word.Equals(item.Key))?.ResetAmountOfSuccsessfulTranslations();
                 }
-                
                 i++;
             }
 
@@ -128,7 +109,6 @@ namespace EnglishTrainer
                     _dictionary.Find(word => word.Equals(task[i]))?.ResetAmountOfSuccsessfulTranslations();
                 }
             }
-
             return results;
         }
     }
