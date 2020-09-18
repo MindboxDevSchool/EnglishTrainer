@@ -1,0 +1,6 @@
+Value,Translation,IsLearnedWord,NumberOfCorrectlyTranslationsByUser
+translation,перевод,False,2
+language,язык,False,3
+basket,корзина,False,2
+true,правда,False,2
+little,маленький,True,5
