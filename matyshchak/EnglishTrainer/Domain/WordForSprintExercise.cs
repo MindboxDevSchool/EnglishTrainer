@@ -2,24 +2,23 @@
 
 namespace EnglishTrainer
 {
-    public class EnglishWordForSprintExercise
+    public class WordForSprintExercise
     {
-        public EnglishWordForSprintExercise(EnglishWord wordToLearn)
+        public WordForSprintExercise(Word wordToLearn)
         {
             WordToLearn = wordToLearn;
         }
         
-        public EnglishWordForSprintExercise(EnglishWord wordToLearn, List<string> wrongTranslations)
+        public WordForSprintExercise(Word wordToLearn, List<string> wrongTranslations)
         {
             WordToLearn = wordToLearn;
             WrongTranslations = wrongTranslations;
         }
 
-        public EnglishWord WordToLearn { get; }
+        public Word WordToLearn { get; }
         private List<string> WrongTranslations { get; }
-        public List<string> RussianTranslations => 
-            WrongTranslations ?? WordToLearn.RussianTranslations;
-
+        public List<string> Translations => 
+            WrongTranslations ?? WordToLearn.Translations;
         public bool WithWrongTranslations => WrongTranslations != null;
     }
 }

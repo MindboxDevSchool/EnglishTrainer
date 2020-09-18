@@ -1,50 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace EnglishTrainer
 {
-    public class SprintExercise
+    public class SprintExercise : IExercise
     {
-        private readonly IEnglishWordsRepository _englishWordsRepository;
-        private readonly Random _random = new Random();
+        private IReadOnlyList<WordForSprintExercise> Words { get; }
 
-        public SprintExercise(IEnglishWordsRepository englishWordsRepository)
+        public SprintExercise(IReadOnlyList<WordForSprintExercise> wordsForSprintExercise)
         {
-            _englishWordsRepository = englishWordsRepository;
+            Words = wordsForSprintExercise;
         }
 
-        public IReadOnlyList<EnglishWordForSprintExercise> GetWords(int numberOfWordsForExercise, int howManyWordsWithWrongTranslations)
+        public override string ToString()
         {
-            var words = _englishWordsRepository
-                .GetRandomNotLearnedWords(numberOfWordsForExercise + howManyWordsWithWrongTranslations)
-                .ToList();
-            
-            var wordsForExercise = words
-                .Take(numberOfWordsForExercise)
-                .Select(word => new EnglishWordForSprintExercise(word))
-                .ToList();
-
-            var translationsForShuffling = words
-                .TakeLast(howManyWordsWithWrongTranslations)
-                .Select(word => word.RussianTranslations)
-                .ToList();
-
-            return ShuffleTranslationsToRandomWords(wordsForExercise, translationsForShuffling);
-
-        }
-
-        private IReadOnlyList<EnglishWordForSprintExercise> ShuffleTranslationsToRandomWords(IReadOnlyList<EnglishWordForSprintExercise> words, IReadOnlyList<List<string>> translationsToShuffle)
-        {
-            if (translationsToShuffle.Count > words.Count)
-                throw new ArgumentException();
-            var wordsForExercise = new List<EnglishWordForSprintExercise>(words);
-            for (var i = 0; i < translationsToShuffle.Count; i++)
+            var sb = new StringBuilder();
+            foreach (var word in Words)
             {
-                wordsForExercise[i] = new EnglishWordForSprintExercise(wordsForExercise[i].WordToLearn, translationsToShuffle[i]);
+                sb.Append(string.Join(", ", word.Translations.Take(word.Translations.Count-1)));
+                sb.Append(word.Translations.TakeLast(1) + ".\n");
             }
 
-            return wordsForExercise.OrderBy(_ => Guid.NewGuid()).ToList();
+            return sb.ToString();
+        }
+
+        public Result GetResult(List<string> userAnswers)
+        {
+            var parsedAnswers = ParseUserAnswers(userAnswers);
+            
+            var numberOfCorrectAnswers = Words
+                .Zip(parsedAnswers, (word, userAns) => (word.WithWrongTranslations && !userAns)
+                                                       || !word.WithWrongTranslations && userAns)
+                .Count();
+            var numberOfWrongAnswers = Words.Count - numberOfCorrectAnswers;
+            
+            return new Result(numberOfCorrectAnswers, numberOfWrongAnswers);
+        }
+
+        private IEnumerable<bool> ParseUserAnswers(IReadOnlyCollection<string> userAnswers)
+        {
+            if (userAnswers.Count != Words.Count)
+                throw new ArgumentException();
+
+            return userAnswers
+                .Select(ans => ans == "y")
+                .ToList();
         }
     }
 }
