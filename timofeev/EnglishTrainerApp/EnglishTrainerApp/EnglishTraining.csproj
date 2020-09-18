@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="DictionaryData_EN-RU.csv" />
+      <EmbeddedResource Include="DictionaryData_EN-RU.csv">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="TranslationEnglishToRussianTrainingMethods, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\..\TranslationEnglishToRussianTrainingMethods\TranslationEnglishToRussianTrainingMethods\obj\Release\netcoreapp3.1\TranslationEnglishToRussianTrainingMethods.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>
