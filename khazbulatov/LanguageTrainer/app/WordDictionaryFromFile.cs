@@ -8,9 +8,7 @@ namespace LanguageTrainer.app
     public class WordDictionaryFromFile : WordDictionary
     {
         private readonly string _filename;
-        
-        public WordDictionaryFromFile(string filename, Language fromLanguage, Language toLanguage)
-            : base(fromLanguage, toLanguage)
+        public WordDictionaryFromFile(string filename)
         {
             _filename = filename;
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LanguageTrainer.model
 {
@@ -15,10 +16,10 @@ namespace LanguageTrainer.model
             TimesPracticedToLearn = timesPracticedToLearn;
         }
 
-        public void Practice<TExercise>() where TExercise : Exercise, new()
+        public void Practice<TExercise>(Func<object, object> taskPresenter) where TExercise : Exercise, new()
         {
             TExercise exercise = Exercise.Create<TExercise>(Words);
-            IEnumerable<string> correctWords = exercise.Practice();
+            IEnumerable<string> correctWords = exercise.Practice(taskPresenter);
             foreach (string word in correctWords)
             {
                 int timesPracticed = PracticedWords.GetValueOrDefault(word) + 1;

@@ -10,11 +10,6 @@ namespace LanguageTrainer.model
 
         public abstract Dictionary<string, string> Load(Language fromLanguage, Language toLanguage);
 
-        public WordDictionary(Language fromLanguage, Language toLanguage)
-        {
-            _dictionary = Load(fromLanguage, toLanguage);
-        }
-
         public Maybe<string> LookUp(string word)
         {
             return _dictionary.ContainsKey(word)
