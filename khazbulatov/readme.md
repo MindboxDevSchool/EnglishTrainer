@@ -1,1 +1,2 @@
-Здесь должен лежать солюшн
+﻿# Language Trainer
+Completed by Arthur Khazbulatov
